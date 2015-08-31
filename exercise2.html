@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Hello HTML!</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<table border="1">
+	<tr><td>Athenian</td><td>Owl</td></tr>
+	<tr><td colspan="2"><img src="http://explore.rice.edu/uploadedImages/Explore/Welcome_to_Rice/riceacademicseal1.jpg"></td></tr>
+</table>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<ul>
+	<li><a href="http://www.rice.edu">Rice</a></li>
+	<li><a href="http://www.chron.com">Houston Chronicle</a></li>
+	<li><a href="http://www.twitter.com">Twitter</a></li>
+	<li><a href="http://www.twosigma.com">TwoSigma</a></li>
+</ul>
+
+<table>
+	<tr>
+		<td>
+			<textarea rows="10" cols="50">
+
+
+			 --- Enter your message here --- 
+
+
+			</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button onclick="clearTextArea()" type="button">Clear</button>
+		</td>
+	</tr>
+</table>
+
+<img src="" alt="dog" width="128" height="128" id="dogImage">
+
+<p>Counting down <span style="color:blue" id="time">15</span></p>
+<button onclick="stopCountDown()" type="button">Stop</button>
+<button onclick="startCountDown()" type="button">Start</button>
+<button onclick="resetCountDown()" type="button">Reset</button>
+<input type="input" value="" id="countdownInput">
+
+<script>
+	var currentImgIndex = 0;
+	var imgSources = [
+		"http://www.butlercountyhs.org/Graphics/Dogs/ButlerHumaneSociety3.png",
+		"http://static.ddmcdn.com/gif/earliest-dogs-660x433-130306-akita-660x433.jpg",
+		"http://www.besttorontodogtrainer.com/wp-content/uploads/2013/12/dog-training-toronto.jpg",
+		"http://animalia-life.com/data_images/dog/dog8.jpg",
+		"http://brilliantdogtraining.com/wp-content/uploads/2013/07/Doggy-dogs-27377981-1595-1596.jpg"
+	]
+	var secondsLeft = 15;
+	var countdownInterval;
+
+	function clearTextArea() {
+		document.getElementsByTagName("textarea")[0].value = "";
+	}
+
+	function updateImage() {
+		currentImgIndex++;
+		if (currentImgIndex >= imgSources.length) {
+			currentImgIndex = 0;
+		}
+		document.getElementById("dogImage").src = imgSources[currentImgIndex];
+	}
+
+	function countdown() {
+		if (secondsLeft === 0) {
+			clearInterval(1);
+			window.location = "https://www.clear.rice.edu/comp431/sample/hello.html";
+		} else {
+			secondsLeft--;
+			document.getElementById("time").textContent = secondsLeft;
+		}
+	}
+
+	function startCountDown() {
+		countdownInterval = setInterval(countdown, 1000);	
+	}
+	
+
+	function stopCountDown() {
+		clearInterval(countdownInterval);
+	}
+
+	function resetCountDown() {
+		secondsLeft = parseInt(document.getElementById("countdownInput").value.trim(), 10);
+		document.getElementById("time").textContent = secondsLeft;
+	}
+
+	setInterval(updateImage, 1000);
+	setTimeout(
+		function() { 
+			alert(" page will refresh when the counter reaches zero");
+		}, 
+		5000
+	);
+	startCountDown();
+</script>
