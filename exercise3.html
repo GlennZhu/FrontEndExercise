@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Pizza!</title>
+    <meta charset="utf-8">
+</head>
+
+<form name="order">
+  First name:
+  <input type="text" name="firstname">
+  Last name:
+  <input type="text" name="lastname">
+</form>
+
+<button onclick="setCookie()" type="button">Set Cookie</button>
+<button onclick="clearFields()" type="button">Clear Fields</button>
+<button onclick="loadCookie()" type="button">Load Cookie</button>
+
+<script>
+  function setCookie() {
+    var form = document.forms["order"];
+    var expiry = new Date(2020, 1, 1, 0, 0, 0, 0);
+    document.cookie = "firstname=" + form["firstname"].value + "; expires=" + expiry.toGMTString() + ";";
+    document.cookie = "lastname=" + form["lastname"].value + "; expires=" + expiry.toGMTString() + ";";
+  }
+
+  function clearFields() {
+    var form = document.forms["order"];
+    form["firstname"].value = "";
+    form["lastname"].value = "";
+  }
+
+  function loadCookie() {
+    var form = document.forms["order"];
+    var cookie = document.cookie.replace(" ", "");
+    var splited = cookie.split(';');
+    
+    splited.map( function (equivalance) {
+        var keyValue = equivalance.split('=');
+        form[keyValue[0]].value = keyValue[1];
+      }
+    )
+  }
+
+</script>
